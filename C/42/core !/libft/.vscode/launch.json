@@ -1,0 +1,32 @@
+{
+  "configurations": [
+    {
+      "type": "lldb",
+      "request": "launch",
+      "name": "Launch",
+      "program": "${workspaceFolder}/a.out",
+      "args": [],
+      "cwd": "${workspaceFolder}",
+      "preLaunchTask": "C/C++: gcc build active file"
+    },
+    {
+      "name": "C/C++ Runner: Debug Session",
+      "type": "cppdbg",
+      "request": "launch",
+      "args": [],
+      "stopAtEntry": false,
+      "externalConsole": true,
+      "cwd": "c:/Users/wobbe/Documents/code/C/42/core !/intra-uuid-da4f7ede-ebcb-440e-a879-d6734394cf7d-6992593-wwiedijk",
+      "program": "c:/Users/wobbe/Documents/code/C/42/core !/intra-uuid-da4f7ede-ebcb-440e-a879-d6734394cf7d-6992593-wwiedijk/build/Debug/outDebug",
+      "MIMode": "gdb",
+      "miDebuggerPath": "gdb",
+      "setupCommands": [
+        {
+          "description": "Enable pretty-printing for gdb",
+          "text": "-enable-pretty-printing",
+          "ignoreFailures": true
+        }
+      ]
+    }
+  ]
+}
