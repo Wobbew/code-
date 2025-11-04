@@ -1,5 +1,6 @@
 #include <unistd.h>
 #include <stdio.h>
+#include "ft_printf.h"
 
 int ft_put_x_X(unsigned int num, char c)
 {
@@ -25,12 +26,3 @@ int ft_put_x_X(unsigned int num, char c)
 	return(len);
 }
 
-int main(int argc, char const *argv[])
-{
-	int i;
-	i = -747385742;
-	ft_put_x_X(i, 'x');
-	printf("\n");
-	printf("%x\n", i);
-	return 0;
-}
