@@ -6,7 +6,7 @@
 /*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/11/05 17:45:17 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/11/06 17:37:13 by wwiedijk      ########   odam.nl         */
+/*   Updated: 2025/11/07 14:37:46 by wwiedijk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
 
 char	*get_next_line(int fd)
 {
-	// if (fd < 0 || BUFFER_SIZE <= 0 || !fd)
-	// 	return (NULL);
+	if (fd < 0 || BUFFER_SIZE <= 0 || !fd)
+		return (NULL);
 	char		uitput[BUFFER_SIZE];
 	char		*next_line;
 	char		*tmp;
@@ -29,13 +29,17 @@ char	*get_next_line(int fd)
 	while (len(str, '\n') == -1 || len(str, '\0') == 0)
 	{
 		i = read(fd, uitput, BUFFER_SIZE);
-		if (i == 0)
+		if (i == 0 && !str)
+			return (NULL);
+		if (i == 0&& (len(str, '\n') == -1 || len(str, '\0') == 0))
 		{
-			tmp = ft_substr(str, 0, len(str, '\0'));;
-			str = NULL;
+			tmp = ft_substr(str, 0, len(str, '\0'));
 			free(str);
+			str = NULL;
 			return (tmp);
 		}
+		if (i < BUFFER_SIZE)
+			uitput[i] = '\0';
 		str = ft_strjoin(str, uitput);
 	}
 	next_line = ft_substr(str, 0, len(str, '\n') + 1);
@@ -43,7 +47,6 @@ char	*get_next_line(int fd)
 	free(str);
 	str = ft_substr(tmp, 0, len(tmp, '\0'));
 	free(tmp); 
-	printf("%d",len(str, '\0') == -1);
 	return (next_line);
 }
 
