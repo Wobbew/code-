@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   ft_isprint.c                                       :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: wwiedijk <wwiedijk@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/10/06 18:47:37 by wwiedijk          #+#    #+#             */
-/*   Updated: 2025/10/19 15:01:59 by wwiedijk         ###   ########.fr       */
+/*                                                        ::::::::            */
+/*   ft_isprint.c                                       :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/10/06 18:47:37 by wwiedijk      #+#    #+#                 */
+/*   Updated: 2025/11/06 15:36:39 by wwiedijk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ int	ft_isprint(int i)
 	else
 		return (0);
 }
-// #include <stdio.h>
-//  int main(void)
-//  {
-//    int i;
-//    i = isprint('y');
-//    printf("%d", i);
-//  }
+#include <stdio.h>
+ int main(void)
+ {
+   int i;
+   i = isprint('y');
+   printf("%d", i);
+ }
