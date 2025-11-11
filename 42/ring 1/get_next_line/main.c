@@ -2,6 +2,11 @@
 #include <fcntl.h>
 #include <stdio.h>
 
+#include "get_next_line.h"
+#include <fcntl.h>
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 int main(void)
 {
     int fd;
@@ -17,4 +22,6 @@ int main(void)
 		free(line);
     close(fd);
     return (0);
+
+
 }

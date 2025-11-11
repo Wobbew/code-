@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   get_next_line_utils.c                              :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
+/*   By: wobbe <wobbe@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/11/05 17:55:18 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/11/07 14:31:21 by wwiedijk      ########   odam.nl         */
+/*   Updated: 2025/11/10 14:22:16 by wobbe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,21 @@ char	*ft_strjoin(char *s1, char *s2)
 	char	*newstr;
 	int		i;
 	int		j;
+	long int s1_len;
+	long int s2_len;
 
 	j = 0;
 	i = 0;
-	newstr = malloc((len(s1, '\0') + len(s2, '\0') + 1) * sizeof(char));
-	if (!newstr)
+	s1_len = len(s1, '\0');
+	s2_len = len(s2, '\0');
+	if (s2_len == -1)
 		return (NULL);
+	newstr = malloc((s1_len + s2_len + 1) * sizeof(char));
+	if (!newstr)
+	{
+		free(s1);
+		return (NULL);
+	}
 	if (s1 != NULL)
 	{
 		while (s1[i])
@@ -75,7 +84,10 @@ char	*ft_substr(char *s, unsigned int start, size_t l)
 		l = len(s + start, '\0');
 	sub = malloc((l + 1) * sizeof(char));
 	if (!sub)
+	{
+		
 		return (NULL);
+	}
 	while (s[start + i] && l > i)
 	{
 		sub[i] = s[start + i];
@@ -83,4 +95,10 @@ char	*ft_substr(char *s, unsigned int start, size_t l)
 	}
 	sub[i] = '\0';
 	return (sub);
+}
+
+void	free_all(char **str)
+{
+	free(*str);
+	*str = NULL;
 }
