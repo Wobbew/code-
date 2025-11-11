@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   get_next_line.c                                    :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2025/11/11 14:26:36 by wwiedijk      #+#    #+#                 */
+/*   Updated: 2025/11/11 17:55:22 by wwiedijk      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "get_next_line.h"
+
 char	*get_next_line(int fd)
 {
 	char		*buffer;
@@ -7,35 +19,34 @@ char	*get_next_line(int fd)
 	char		*tmp;
 	static char	*str = NULL;
 	int			i;
-	
-	// Check fd BEFORE allocating
+
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
-	
 	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);
-
 	i = 1;
 	while (len(str, '\n') == -1 && i > 0)
 	{
 		i = read(fd, buffer, BUFFER_SIZE);
-		if (i < 0)  
+		if ((i < 0) || (i == 0 && !str))
 		{
+			free(str);
+			str = NULL;
 			free(buffer);
-			return (NULL);
-		}
-		if (i == 0 && !str)
-		{
-			free(buffer);  
 			return (NULL);
 		}
 		if (i == 0 && (len(str, '\n') == -1 || len(str, '\0') == 0))
 		{
-			free(buffer);  
+			free(buffer);
 			tmp = ft_substr(str, 0, len(str, '\0'));
 			free(str);
 			str = NULL;
+			if (!tmp || tmp[0] == '\0')
+			{
+				free(tmp);
+				return (NULL);
+			}
 			return (tmp);
 		}
 		buffer[i] = '\0';
@@ -46,8 +57,7 @@ char	*get_next_line(int fd)
 			return (NULL);
 		}
 	}
-	free(buffer);  
-	
+	free(buffer);
 	next_line = ft_substr(str, 0, len(str, '\n') + 1);
 	if (!next_line)
 	{
@@ -56,19 +66,14 @@ char	*get_next_line(int fd)
 		return (NULL);
 	}
 	tmp = str;
-	str = ft_substr(str, len(tmp, '\n') + 1, len(tmp + len(tmp, '\n') + 1, '\0'));
+	str = ft_substr(str, len(tmp, '\n') + 1, len(tmp + len(tmp, '\n') + 1,
+				'\0'));
 	free(tmp);
 	if (!str)
 	{
 		free(next_line);
 		return (NULL);
 	}
-	// if (next_line[0] == '\n' && next_line[1] == '\0')
-	// {
-	// 	free(next_line);
-	// 	next_line = NULL;
-	// 	return (NULL);
-	// }
 	return (next_line);
 }
 

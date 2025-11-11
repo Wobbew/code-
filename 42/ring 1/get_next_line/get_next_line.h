@@ -6,14 +6,14 @@
 /*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/11/05 17:53:27 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/11/07 14:48:50 by wwiedijk      ########   odam.nl         */
+/*   Updated: 2025/11/11 17:56:54 by wwiedijk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1000
+#  define BUFFER_SIZE 1000000
 # endif
 # include <stdio.h>
 # include <stdlib.h>
