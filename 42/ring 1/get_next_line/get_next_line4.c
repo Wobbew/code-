@@ -1,3 +1,4 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
@@ -14,66 +15,63 @@
 
 char	*get_next_line(int fd)
 {
-	char		*buffer;
-	char		*next_line;
-	char		*tmp;
-	static char	*str = NULL;
+	static t_list	*storage;
 	int			i;
 
 	if (fd < 0 || BUFFER_SIZE <= 0 || fd > 1024)
 		return (NULL);
-	buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buffer)
+	storage->buffer = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!storage->buffer)
 		return (NULL);
 	i = 1;
-	while (len(str, '\n') == -1 && i > 0)
+	while (len(storage->str, '\n') == -1 && i > 0)
 	{
-		i = read(fd, buffer, BUFFER_SIZE);
-		if ((i < 0) || (i == 0 && !str))
+		i = read(fd, storage->buffer, BUFFER_SIZE);
+		if ((i < 0) || (i == 0 && !storage->str))
 		{
-			free(str);
-			str = NULL;
-			free(buffer);
+			free(storage->str);
+			storage->str = NULL;
+			free(storage->buffer);
 			return (NULL);
 		}
-		if (i == 0 && (len(str, '\n') == -1 || len(str, '\0') == 0))
+		if (i == 0 && (len(storage->str, '\n') == -1 || len(storage->str, '\0') == 0))
 		{
-			free(buffer);
-			tmp = ft_substr(str, 0, len(str, '\0'));
-			free(str);
-			str = NULL;
-			if (!tmp || tmp[0] == '\0')
+			free(storage->buffer);
+			storage->tmp = ft_substr(storage->str, 0, len(storage->str, '\0'));
+			free(storage->str);
+			storage->str = NULL;
+			if (!storage->tmp || storage->tmp[0] == '\0')
 			{
-				free(tmp);
+				free(storage->tmp);
 				return (NULL);
 			}
-			return (tmp);
+			return (storage->tmp);
 		}
-		buffer[i] = '\0';
-		str = ft_strjoin(str, buffer);
-		if (!str)
+		storage->buffer[i] = '\0';
+		storage->str = ft_strjoin2(storage);
+		if (!storage->str)
 		{
-			free(buffer);
+			free(storage->buffer);
 			return (NULL);
 		}
 	}
-	free(buffer);
-	next_line = ft_substr(str, 0, len(str, '\n') + 1);
-	if (!next_line)
+	free(storage->buffer);
+	storage->next_line = ft_substr(storage->str, 0, len(storage->str, '\n') + 1);
+	if (!storage->next_line)
 	{
-		free(str);
-		str = NULL;
+		free(storage->str);
+		storage->str = NULL;
 		return (NULL);
 	}
-	tmp = str;
-	str = ft_substr(str, len(tmp, '\n') + 1, len(tmp + len(tmp, '\n') + 1,
+	storage->tmp = storage->str;
+	storage->str = ft_substr(storage->str, len(storage->tmp, '\n') + 1, len(storage->tmp + len(storage->tmp, '\n') + 1,
 				'\0'));
-	free(tmp);
-	if (!str)
+	free(storage->tmp);
+	if (!storage->str)
 	{
-		free(next_line);
+		free(storage->next_line);
 		return (NULL);
 	}
-	return (next_line);
+	return (storage->next_line);
 }
 

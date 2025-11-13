@@ -74,19 +74,12 @@ char	*get_next_line(int fd)
 		return(NULL);
 	next_line = ft_substr(str, 0, len(str, '\n') + 1);
 	if (!next_line)
-	{
-		free(str);
-		str = NULL;
-		return (NULL);
-	}
+		return (free(str), str = NULL, NULL);
 	tmp = str;
 	str = ft_substr(str, len(tmp, '\n') + 1, len(tmp + len(tmp, '\n') + 1,'\0'));
 	free(tmp);
 	if (!str)
-	{
-		free(next_line);
-		return (NULL);
-	}
+		return (free(next_line),NULL);
 	return (next_line);
 }
 

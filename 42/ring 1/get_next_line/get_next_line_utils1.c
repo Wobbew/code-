@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   get_next_line_utils.c                              :+:    :+:            */
+/*   get_next_line_utils1.c                             :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: wobbe <wobbe@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/11/05 17:55:18 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/11/12 17:06:34 by wobbe         ########   odam.nl         */
+/*   Updated: 2025/11/12 17:47:14 by wobbe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,50 +34,51 @@ long int	len(char *s, char c)
 	return (-1);
 }
 
-char	*ft_filljoin(char *s1, char *s2, char *newstr)
+char	*ft_filljoin2(t_list *storage, char *newstr)
 {
 	int		i;
 	int		j;
 
 	j = 0;
 	i = 0;
-	if (len(s2, '\0') == -1)
+	if (len(storage->buffer, '\0') == -1)
 		return (NULL);
-	if (s1 != NULL)
+	if (storage->str != NULL)
 	{
-		while (s1[i])
+		while (storage->str[i])
 		{
-			newstr[i] = s1[i];
+			newstr[i] = storage->str[i];
 			i++;
 		}
 	}
-	while (s2[j])
+	while (storage->buffer[j])
 	{
-		newstr[i + j] = s2[j];
+		newstr[i + j] = storage->buffer[j];
 		j++;
 	}
 	newstr[i + j] = '\0';
 	return (newstr);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin2(t_list *storage)
 {
 	char	*newstr;
 	long int s1_len;
 	long int s2_len;
-	s1_len = len(s1, '\0');
-	s2_len = len(s2, '\0');
+	s1_len = len(storage->str, '\0');
+	s2_len = len(storage->buffer, '\0');
 	if (s2_len == -1)
 		return (NULL);
 	newstr = malloc((s1_len + s2_len + 1) * sizeof(char));
 
 	if (!newstr)
 	{
-		free(s1);
+		free(storage->str);
+		free(storage->buffer);
 		return (NULL);
 	}
-	newstr = ft_filljoin(s1, s2, newstr);
-	return (free(s1), newstr);
+	newstr = ft_filljoin2(storage, newstr);
+	return (free(storage->str), newstr);
 }
 char	*ft_substr(char *s, unsigned int start, size_t l)
 {
