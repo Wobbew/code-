@@ -6,101 +6,85 @@
 /*   By: wobbe <wobbe@student.42.fr>                  +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/11/05 17:55:18 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/11/12 17:06:34 by wobbe         ########   odam.nl         */
+/*   Updated: 2025/11/15 15:12:30 by wobbe         ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-long int	len(char *s, char c)
+size_t	ft_strlen(const char *str)
 {
-	long int	i;
+	size_t	i;
 
-	if ((!s) && (c == '\0'))
+	i = 0;
+	if (!str)
 		return (0);
-	if (!s)
-		return (-1);
-	i = 0;
-	while (s[i] != 0)
-	{
-		if (s[i] == c)
-		{
-			return (i);
-		}
+	while (str[i] != '\0')
 		i++;
-	}
-	if (c == 0)
-		return (i);
-	return (-1);
-}
-
-char	*ft_filljoin(char *s1, char *s2, char *newstr)
-{
-	int		i;
-	int		j;
-
-	j = 0;
-	i = 0;
-	if (len(s2, '\0') == -1)
-		return (NULL);
-	if (s1 != NULL)
-	{
-		while (s1[i])
-		{
-			newstr[i] = s1[i];
-			i++;
-		}
-	}
-	while (s2[j])
-	{
-		newstr[i + j] = s2[j];
-		j++;
-	}
-	newstr[i + j] = '\0';
-	return (newstr);
+	return (i);
 }
 
 char	*ft_strjoin(char *s1, char *s2)
 {
 	char	*newstr;
-	long int s1_len;
-	long int s2_len;
-	s1_len = len(s1, '\0');
-	s2_len = len(s2, '\0');
-	if (s2_len == -1)
-		return (NULL);
-	newstr = malloc((s1_len + s2_len + 1) * sizeof(char));
+	int		i;
 
+	i = 0;
+	newstr = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
 	if (!newstr)
+		return (free(s1), NULL);
+	while (s1 && s1[i])
 	{
-		free(s1);
-		return (NULL);
+		newstr[i] = s1[i];
+		i++;
 	}
-	newstr = ft_filljoin(s1, s2, newstr);
-	return (free(s1), newstr);
+	while (s2 && *s2)
+	{
+		newstr[i] = *s2;
+		s2++;
+		i++;
+	}
+	newstr[i] = '\0';
+	free(s1);
+	return (newstr);
 }
-char	*ft_substr(char *s, unsigned int start, size_t l)
+
+char	*ft_strchr( char *s, int c)
 {
-	char	*sub;
-	size_t		i;
+	int	i;
 
 	i = 0;
 	if (!s)
 		return (NULL);
-	if (len(s + start, '\0') < (long int)l)
-		l = len(s + start, '\0');
-	sub = malloc((l + 1) * sizeof(char));
-	if (!sub)
+	while (s[i] != '\0')
 	{
-		
-		return (NULL);
-	}
-	while (s[start + i] && l > i)
-	{
-		sub[i] = s[start + i];
+		if (s[i] == (char)c)
+		{
+			return ((char *)s + i);
+		}
 		i++;
 	}
-	sub[i] = '\0';
-	return (sub);
+	if ((char)c == '\0')
+		return ((char *)s + i);
+	return (NULL);
 }
 
+char	*ft_strdup(char *s)
+{
+	int		i;
+	char	*newstr;
+
+	i = 0;
+	newstr = malloc((ft_strlen(s) + 1) * sizeof(char));
+	if (!newstr)
+	{
+		return (free(s), NULL);
+	}
+	while (s[i] != '\0')
+	{
+		newstr[i] = s[i];
+		i++;
+	}
+	free(s);
+	return (newstr);
+}
