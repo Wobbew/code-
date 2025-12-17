@@ -1,0 +1,16 @@
+#include "Pushswap.h"
+int main(int argc, char const *argv[])
+{
+	t_list	*stack_a;
+	t_list	*stack_b;
+
+	stack_a = NULL;
+	stack_b = NULL;
+	if (check_args(argc, argv) == 1)
+		return 1;
+	if(make_stack(&stack_a, argc, argv))
+		return (1); //free stacks here
+	sort(&stack_a, &stack_b);
+	
+	return 0;
+}

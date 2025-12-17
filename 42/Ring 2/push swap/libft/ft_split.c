@@ -3,10 +3,10 @@
 /*                                                        ::::::::            */
 /*   ft_split.c                                         :+:    :+:            */
 /*                                                     +:+                    */
-/*   By: wobbe <wobbe@student.42.fr>                  +#+                     */
+/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2025/10/16 22:33:17 by wwiedijk      #+#    #+#                 */
-/*   Updated: 2025/12/15 19:57:45 by wobbe         ########   odam.nl         */
+/*   Updated: 2025/10/29 22:14:58 by wwiedijk      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
