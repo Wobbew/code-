@@ -13,6 +13,8 @@ int sort(t_list **stack_a, t_list **stack_b)
 		SA(stack_a);
 	if (size == 3)
 		sort3(stack_a);
+	if (size > 3)
+		the_turk(stack_a);
 	print_stack(*stack_a);
 	return (0);
 }
@@ -37,3 +39,58 @@ void sort3(t_list **stack)
 			SA(stack);
 	}
 }
+void the_turk(t_list **stack_a)//, t_list **stack_b
+{
+	fillnode(stack_a, 'A', NULL);
+	
+}
+
+void	fillnode(t_list **stack, char watstack, t_list **targetstack)
+{
+	int i;
+	t_list *node;
+	node = *stack;
+	i = 0;
+	if (watstack == 'A' && targetstack)
+		fillnode(targetstack, 'B', NULL);
+	else if (watstack == 'B' && targetstack)
+		fillnode(targetstack, 'A', NULL);
+	while (node)
+	{
+		node->index = i;
+		node->stack = watstack;
+		if (targetstack)
+			findcheapest(node,targetstack);//, stack
+		else
+		{
+			node->target = NULL;
+			node->cheapest =false;
+			node->cost = -1;
+		}
+	}
+	
+}
+
+void findcheapest(t_list *node, t_list **targetstack)//, t_list **stack
+{
+	findtargetnode(node, targetstack);
+
+}
+void findtargetnode(t_list *node, t_list **targetstack)
+{
+	t_list *targetnode;
+	targetnode = *targetstack;
+	if ((!node->target) && (targetnode))
+		node->target = targetnode;
+	if(node->stack == 'A')
+	{
+		while (targetnode)
+		{
+			if (node->target->number > targetnode->number && targetnode->number <= node->number)
+				node->target = targetnode;
+			targetnode = targetnode->next;
+		}
+	}
+	printf("node num:%d\t targetnode num:%d\n", node->number, node->target->number);
+}
+

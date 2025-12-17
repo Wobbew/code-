@@ -53,13 +53,13 @@ int ft_printf(const char *format, ...)
 }
 
 
-int main()
-{
-	int num;
-	num = -100;
-	printf("%d\n", ft_printf("%%%c%%%s%%%s", 'a', "hi", "ne"));
-	printf("%d\n", printf("%%%c%%%s%%%s", 'a', "hi", "ne"));
+// int main()
+// {
+// 	int num;
+// 	num = -100;
+// 	printf("%d\n", ft_printf("%%%c%%%s%%%s", 'a', "hi", "ne"));
+// 	printf("%d\n", printf("%%%c%%%s%%%s", 'a', "hi", "ne"));
 	
-	// ft_printf("a%aa%a");
-	//0x
-} 
+// 	// ft_printf("a%aa%a");
+// 	//0x
+// } 

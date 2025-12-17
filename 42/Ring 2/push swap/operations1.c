@@ -49,3 +49,5 @@ void RRA(t_list **stack_a)
 	*stack_a = last;
 	write(1, "RRA\n", 4);
 }
+
+void PB(t_list )

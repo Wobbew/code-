@@ -1,27 +1,4 @@
 #include "Pushswap.h"
-
-// int make_stack(t_list **stack, int argc, char const *argv[])
-// {
-// 	int i;
-// 	int tmp[];
-// 	char **tmparr;
-// 	t_list	*nodetmp;
-
-// 	i = 1;
-// 	while (i < argc)
-// 	{
-// 		tmparr = ft_split(argv[i], ' ');
-// 		while (**tmparr)
-// 		{
-// 			nodetmp = new_node(ft_atoi(*tmparr));
-// 			add_back(stack, nodetmp);
-// 			tmparr++;
-// 		}
-// 		 i++;
-// 		}
-// 	return (0);
-// }
-
 t_list	*new_node(int number)
 {
 	t_list	*node;
@@ -31,7 +8,7 @@ t_list	*new_node(int number)
 	node->number = number;
 	node->next = NULL;
 	node->prev = NULL;
-	node->targit = NULL;
+	node->target = NULL;
 	node->index = -1;
 	node->stack = '\0';
 	node->cost = -1;
@@ -96,6 +73,3 @@ int count_nodes(t_list *stack)
 	}
 	return (count);
 }
-
-
-
