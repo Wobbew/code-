@@ -30,13 +30,17 @@ int count_nodes(t_list *stack);
 int sort(t_list **stack_a, t_list **stack_b);
 void	SA(t_list **stack_a);
 void	print_stack(t_list *stack);
+void	print_info(t_list *node);
 bool is_biggest(int num, t_list *stack);
 void sort3(t_list **stack);
 t_list	*ft_lstlast(t_list *lst);
 void findtargetnode(t_list *node, t_list **targetstack);
-void findcheapest(t_list *node, t_list **targetstack);//, t_list **stack
+void findcost(t_list *node, t_list **targetstack);//, t_list **stack
 void	fillnode(t_list **stack, char watstack, t_list **targetstack);
-void the_turk(t_list **stack_a);//, t_list **stack_b
+void the_turk_part_two(t_list **stack_a, t_list **stack_b);
+void the_turk(t_list **stack_a, t_list **stack_b);
+int above_median_line(t_list *node, t_list **stack);
 void RA(t_list **stack_a);
 void RRA(t_list **stack_a);
+void PB(t_list **stack_a, t_list **stack_b);
 #endif

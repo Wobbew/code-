@@ -50,4 +50,19 @@ void RRA(t_list **stack_a)
 	write(1, "RRA\n", 4);
 }
 
-void PB(t_list )
+void PB(t_list **stack_a, t_list **stack_b)
+{
+	t_list *first_a;
+	t_list *first_b;
+
+	first_a = *stack_a;
+	first_b = *stack_b;
+	first_a->next->prev = first_a->prev;
+	*stack_a = first_a->next;
+	first_a->next = first_b;
+	first_a->prev = NULL;
+	if(first_b)
+		first_b->prev= first_a;
+	*stack_b = first_a;
+	write(1,"PB\n", 3);
+}

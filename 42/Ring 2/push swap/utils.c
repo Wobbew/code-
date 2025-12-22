@@ -9,3 +9,13 @@ void	print_stack(t_list *stack)
 	printf("\n");
 	
 }
+void	print_info(t_list *node)
+{
+	while (node)
+	{
+		if(node->target)
+			printf("target number \t%d\n", node->target->number);
+		printf("index \t%d\n", node->index);
+		node= node->next;
+	}
+}
