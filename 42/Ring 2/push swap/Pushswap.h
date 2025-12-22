@@ -10,6 +10,7 @@
 
 typedef struct s_list
 {
+	int			rotate;
 	int			number;
 	int 		index;
 	char		stack;
@@ -35,7 +36,8 @@ bool is_biggest(int num, t_list *stack);
 void sort3(t_list **stack);
 t_list	*ft_lstlast(t_list *lst);
 void findtargetnode(t_list *node, t_list **targetstack);
-void findcost(t_list *node, t_list **targetstack);//, t_list **stack
+void findcost(t_list *node, t_list **targetstack, t_list **stack);//
+int price_move1node(t_list *node, t_list **stack);
 void	fillnode(t_list **stack, char watstack, t_list **targetstack);
 void the_turk_part_two(t_list **stack_a, t_list **stack_b);
 void the_turk(t_list **stack_a, t_list **stack_b);

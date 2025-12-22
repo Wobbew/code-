@@ -1,6 +1,6 @@
 NAME = pushswap.a
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -g
 INC = pushswap.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a

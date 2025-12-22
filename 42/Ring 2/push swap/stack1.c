@@ -5,6 +5,7 @@ t_list	*new_node(int number)
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (0);
+	node->rotate = 0;
 	node->number = number;
 	node->next = NULL;
 	node->prev = NULL;

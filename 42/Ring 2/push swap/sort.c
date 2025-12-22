@@ -65,10 +65,11 @@ void	fillnode(t_list **stack, char watstack, t_list **targetstack)
 		fillnode(targetstack, 'A', NULL);
 	while (node)
 	{
+		node->rotate = 0;
 		node->index = i;
 		node->stack = watstack;
 		if (targetstack)
-			findcost(node,targetstack);//, stack
+			findcost(node,targetstack, stack);
 		else
 		{
 			node->target = NULL;
@@ -81,16 +82,20 @@ void	fillnode(t_list **stack, char watstack, t_list **targetstack)
 	
 }
 
-void findcost(t_list *node, t_list **targetstack)//, t_list **stack
+void findcost(t_list *node, t_list **targetstack, t_list **stack)
 {
 	int cost;
 	cost = 0;
 	findtargetnode(node, targetstack);
-	if(node->index == 0 || node->target->index == 0)
+	if(node->index == 0 )
 	{
-
+		cost = price_move1node(node->target, targetstack);
 	}
-
+	if (node->target->index == 0)
+	{
+		price_move1node(node, stack);
+	}
+	
 }
 
 int price_move1node(t_list *node, t_list **stack)
@@ -99,15 +104,29 @@ int price_move1node(t_list *node, t_list **stack)
 	int tmp;
 	price =0;
 	tmp = above_median_line(node, stack);
+	if (tmp > 0)
+		price = node->index;
+	if (tmp < 0)
+		price = count_nodes(*stack) - node->index;
 	return(price);
 }
 int above_median_line(t_list *node, t_list **stack)
 {
 	float median_line;
-	median_line =count_nodes(*stack) / 2;
-	printf("%f\n%d",median_line, node->index);
-	return(0);
+	median_line = count_nodes(*stack) / 2. ;
+	if (median_line< node->index+1)
+	{
+		node->rotate =1;
+		return(1);
+	}
+		if (median_line< node->index+1)
+	{
+		node->rotate =-1;
+		return(-1);
+	}
+		return(0);
 }
+
 void findtargetnode(t_list *node, t_list **targetstack)
 {
 	t_list *targetnode;
@@ -136,14 +155,10 @@ void findtargetnode(t_list *node, t_list **targetstack)
 }
 void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 {
-	fillnode(stack_a, 'A', stack_b);
 	sort3(stack_a);
 	fillnode(stack_b, 'B', stack_a);
-	while (stack_a)
-	{
-		
-	}
 	print_stack(*stack_a);
+	exit(0);
 }
 
 // void	move_cheapest(t_list stack,t_list moveto)
