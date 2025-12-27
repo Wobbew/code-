@@ -59,6 +59,7 @@ int make_stack(t_list **stack, int argc, char const *argv[])
 			return (1);
 		i++;
 	}
+	same_args(stack);
 	return (0);
 }
 int count_nodes(t_list *stack)

@@ -11,7 +11,13 @@ int main(int argc, char const *argv[])
 	if(make_stack(&stack_a, argc, argv))
 		return (1); //free stacks here
 	sort(&stack_a, &stack_b);
-	
+	// PB(&stack_a, &stack_b);
+	// PB(&stack_a, &stack_b);
+	// print_stack(stack_a);
+	// print_stack(stack_b);
+	// RRR(&stack_a, &stack_b);
+	// print_stack(stack_a);
+	// print_stack(stack_b);
+
 	return 0;
 }
-node->index
