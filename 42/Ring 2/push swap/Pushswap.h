@@ -61,5 +61,6 @@ void move1totop(t_list **stack, t_list *node);
 void clear_priceinfo(t_list **stack, t_list **targetstack);
 void	fix_stack_rotates(t_list **stack);
 void move_cheapest(t_list **stack, t_list **targetstack);
+void targetnodefor_a(t_list *node,t_list **targetstack);
 void targetnodefor_b(t_list *node,t_list **targetstack);
 #endif

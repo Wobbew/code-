@@ -1,20 +1,25 @@
 #include "Pushswap.h"
-void	SA(t_list **stack_a)
+void SA(t_list **stack_a)
 {
-	t_list	*first;
-	t_list	*second;
-	
-	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
-		return ;
-	first = *stack_a;
-	second = first->next;
+    t_list *first;
+    t_list *second;
+    
+    if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+        return;
+    
+    first = *stack_a;
+    second = first->next;
+    
+    first->next = second->next;
+    if (first->next)  
+        first->next->prev = first; 
 
-	first->next = second->next;
-	second->prev = NULL;
-	second->next = first;
-	first->prev = second;
-	*stack_a = second;
-	write(1, "SA\n", 3);
+    second->prev = NULL;
+    second->next = first;
+    first->prev = second;
+    
+    *stack_a = second;
+    write(1, "SA\n", 3);
 }
 
 void RA(t_list **stack_a)
@@ -35,36 +40,51 @@ void RA(t_list **stack_a)
 }
 void RRA(t_list **stack_a)
 {
-	t_list *first;
-	t_list *last;
-
-	if (!stack_a || !(*stack_a) || !(*stack_a)->next)
-		return;
-	first = *stack_a;
-	last = ft_lstlast(*stack_a);
-	last->prev->next = NULL;
-	last->prev = NULL;
-	last->next = first;
-	first->prev = last;
-	*stack_a = last;
-	write(1, "RRA\n", 4);
+    t_list *first;
+    t_list *last;
+    
+    if (!stack_a || !(*stack_a) || !(*stack_a)->next)
+        return;
+    
+    first = *stack_a;
+    last = ft_lstlast(*stack_a);
+    
+    // Disconnect last from the list
+    last->prev->next = NULL;  // This is fine
+    
+    // Move last to front
+    last->prev = NULL;
+    last->next = first;
+    first->prev = last;
+    *stack_a = last;
+    
+    write(1, "RRA\n", 4);
 }
 
 void PB(t_list **stack_a, t_list **stack_b)
 {
-	t_list *first_a;
-	t_list *first_b;
-
-	first_a = *stack_a;
-	first_b = *stack_b;
-	first_a->next->prev = first_a->prev;
-	*stack_a = first_a->next;
-	first_a->next = first_b;
-	first_a->prev = NULL;
-	if(first_b)
-		first_b->prev= first_a;
-	*stack_b = first_a;
-	write(1,"PB\n", 3);
+    t_list *first_a;
+    t_list *first_b;
+    
+    if (!stack_a || !(*stack_a))
+        return;
+    
+    first_a = *stack_a;
+    first_b = *stack_b;
+    
+    // Remove first_a from stack_a
+    *stack_a = first_a->next;
+    if (*stack_a)
+        (*stack_a)->prev = NULL; 
+    
+    // Add first_a to stack_b
+    first_a->next = first_b;
+    first_a->prev = NULL;
+    if (first_b)
+        first_b->prev = first_a;
+    
+    *stack_b = first_a;
+    write(1, "PB\n", 3);
 }
 void PA(t_list **stack, t_list **stack_a)
 {

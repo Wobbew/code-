@@ -27,3 +27,4 @@ void	print_info(t_list *node)
 		
 	}
 }
+void	vo
