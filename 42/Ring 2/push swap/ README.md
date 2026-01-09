@@ -21,7 +21,9 @@ for mac https://cdn.intra.42.fr/document/document/44202/checker_Mac
 for linux https://cdn.intra.42.fr/document/document/44203/checker_linux
 
 2. 
-make by runing make.
+```bash
+make
+```
 
 This will build the `push_swap` binary.
 
