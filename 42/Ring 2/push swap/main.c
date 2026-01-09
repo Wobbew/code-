@@ -7,9 +7,9 @@ int main(int argc, char const *argv[])
 	stack_a = NULL;
 	stack_b = NULL;
 	if (check_args(argc, argv) == 1)
-		return 1;
+		return (free_all(&stack_a, &stack_b), 1);
 	if(make_stack(&stack_a, argc, argv))
-		return (1); //free stacks here
+		return (free_all(&stack_a, &stack_b), 1); 
 	sort(&stack_a, &stack_b);
 	// PB(&stack_a, &stack_b);
 	// PB(&stack_a, &stack_b);

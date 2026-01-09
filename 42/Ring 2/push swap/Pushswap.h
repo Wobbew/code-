@@ -63,4 +63,5 @@ void	fix_stack_rotates(t_list **stack);
 void move_cheapest(t_list **stack, t_list **targetstack);
 void targetnodefor_a(t_list *node,t_list **targetstack);
 void targetnodefor_b(t_list *node,t_list **targetstack);
+void	free_all(t_list **stack_a, t_list **stack_b);
 #endif

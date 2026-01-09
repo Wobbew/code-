@@ -53,7 +53,7 @@ int make_stack(t_list **stack, int argc, char const *argv[])
 {
 	int i;
 	i = 1;
-	while (i < argc)
+ 	while (i < argc)
 	{
 		if(arrayintonodes(ft_split(argv[i], ' '), stack))
 			return (1);

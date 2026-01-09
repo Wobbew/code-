@@ -19,7 +19,7 @@ void SA(t_list **stack_a)
     first->prev = second;
     
     *stack_a = second;
-    write(1, "SA\n", 3);
+    write(1, "sa\n", 3);
 }
 
 void RA(t_list **stack_a)
@@ -36,7 +36,7 @@ void RA(t_list **stack_a)
 	last->next = first;
 	first->prev = last;
 	first->next = NULL;
-	write(1, "RA\n", 3);
+	write(1, "ra\n", 3);
 }
 void RRA(t_list **stack_a)
 {
@@ -58,7 +58,7 @@ void RRA(t_list **stack_a)
     first->prev = last;
     *stack_a = last;
     
-    write(1, "RRA\n", 4);
+    write(1, "rra\n", 4);
 }
 
 void PB(t_list **stack_a, t_list **stack_b)
@@ -84,7 +84,7 @@ void PB(t_list **stack_a, t_list **stack_b)
         first_b->prev = first_a;
     
     *stack_b = first_a;
-    write(1, "PB\n", 3);
+    write(1, "pb\n", 3);
 }
 void PA(t_list **stack, t_list **stack_a)
 {
@@ -101,7 +101,7 @@ void PA(t_list **stack, t_list **stack_a)
 	if(first_a)
 		first_a->prev= first;
 	*stack_a = first;
-	write(1,"PA\n", 3);
+	write(1,"pa\n", 3);
 }
 void RB(t_list **stack)
 {
@@ -117,7 +117,7 @@ void RB(t_list **stack)
 	last->next = first;
 	first->prev = last;
 	first->next = NULL;
-	write(1, "RB\n", 3);
+	write(1, "rb\n", 3);
 }
 void RRB(t_list **stack)
 {
@@ -133,7 +133,7 @@ void RRB(t_list **stack)
 	last->next = first;
 	first->prev = last;
 	*stack = last;
-	write(1, "RRB\n", 4);
+	write(1, "rrb\n", 4);
 }
 void RR(t_list **stack_a, t_list **stack_b)
 {
@@ -159,7 +159,7 @@ void RR(t_list **stack_a, t_list **stack_b)
 	first->prev = last;
 	first->next = NULL;
 
-	write(1, "RR\n", 3);
+	write(1, "rr\n", 3);
 }
 void RRR(t_list **stack_a, t_list **stack_b)
 {
@@ -185,5 +185,5 @@ void RRR(t_list **stack_a, t_list **stack_b)
 	last->next = first;
 	first->prev = last;
 	*stack_b = last;
-	write(1, "RRR\n", 4);
+	write(1, "rrr\n", 4);
 }

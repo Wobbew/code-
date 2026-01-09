@@ -27,4 +27,30 @@ void	print_info(t_list *node)
 		
 	}
 }
-void	vo
+void	free_all(t_list **stack_a, t_list **stack_b)
+{
+	t_list *tmp;
+	t_list *node;
+	
+	node = *stack_a;
+	while (node)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
+	*stack_a = NULL;
+	
+	if (!stack_b)
+	{
+		return;
+	}
+	node = *stack_b;
+	while (node)
+	{
+		tmp = node->next;
+		free(node);
+		node = tmp;
+	}
+	*stack_b = NULL;
+}

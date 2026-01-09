@@ -23,7 +23,7 @@ int sort(t_list **stack_a, t_list **stack_b)
 		the_turk(stack_a, stack_b);
 	// print_stack(*stack_a);
 	// print_stack(*stack_b);
-	return (0);
+	exit ((free_all(stack_a, stack_b), 0));
 }
 void sort3(t_list **stack)
 {
@@ -31,6 +31,8 @@ void sort3(t_list **stack)
 	t_list *first;
 	first = *stack;
 	last = ft_lstlast(*stack);
+	if( is_sorted(*stack))
+		return;
 	if (is_biggest(last->number, *stack))
 		SA(stack);
 	else if (is_biggest(first->number, *stack))
@@ -69,6 +71,7 @@ void the_turk(t_list **stack_a, t_list **stack_b)
 		PB(stack_a, stack_b);
 		// print_stack(*stack_a);
 		// print_stack(*stack_b);
+		// printf("\n");
 	}
 	the_turk_part_two(stack_a, stack_b);
 }
@@ -435,8 +438,8 @@ void	fix_stack_rotates(t_list **stack)
 }
 void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 {
-	// print_stack(*stack_a);
-	// print_stack(*stack_b);
+	print_stack(*stack_a);
+	print_stack(*stack_b);
 	sort3(stack_a);
 	while (count_nodes(*stack_b) > 0)
 	{
@@ -447,21 +450,21 @@ void the_turk_part_two(t_list **stack_a, t_list **stack_b)
  		move_cheapest(stack_b, stack_a);
 		// print_stack(*stack_a);
 		PA(stack_b, stack_a);
+		// printf("\n");
 		// print_stack(*stack_a);
+		// printf("\n B\t");
 		// print_stack(*stack_b);
+		// printf("\n");
+		// printf("\n");
 	}
 	// print_stack(*stack_a);
 	fix_stack_rotates(stack_a);
-	print_stack(*stack_a);
+	// print_stack(*stack_a);
 	// print_info(*stack_a);
 	// printf("\n");
 	// print_stack(*stack_b);
 	// print_info(*stack_b);10
 	
-	exit(0);
+	exit ((free_all(stack_a, stack_b), 0));
 }
 
-// void	move_cheapest(t_list stack,t_list moveto)
-// {
-	
-// }
