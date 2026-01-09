@@ -16,20 +16,17 @@ Key points:
 
 ## Instructions
 
-1. Ensure you have a checker for the operating system you using, if not download it.  
+ Ensure you have a checker for the operating system you using, if not download it.  
 for mac https://cdn.intra.42.fr/document/document/44202/checker_Mac
 for linux https://cdn.intra.42.fr/document/document/44203/checker_linux
 
-2. 
+### Usage
+- Basic usage:
 ```bash
 make
 ```
 
-This will build the `push_swap` binary.
-
-Usage
-
-- Basic usage:
+- This will build the `push_swap` binary.
 
 ```bash
 ./push_swap 3 2 1 0
