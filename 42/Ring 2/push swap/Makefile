@@ -6,13 +6,17 @@ INC = Pushswap.h
 LIBFT_DIR = libft
 LIBFT = $(LIBFT_DIR)/libft.a
 
-SRCS = main.c \
-       errors.c \
-       stack1.c \
-       sortutills.c \
-       node_info.c \
-       sort.c \
+SRCS = errors.c \
+			 main.c \
+       move_node.c\
+			 node_info.c\
        operations1.c \
+       operations2.c \
+			 price.c\
+       sort.c \
+			 sortutills.c \
+       stack1.c \
+       targetnode.c\
        utils.c
 
 OBJS = $(SRCS:.c=.o)
@@ -32,7 +36,7 @@ $(NAME): $(LIBFT) $(OBJS)
 	$(CC) $(CFLAGS) -I$(LIBFT_DIR) -c $< -o $@
 
 clean:
-	$(MAKE) -C $(LIBFT_DIR) clean
+	$(MAKE) -C $(LIBFT_DIR) fclean
 	rm -f $(OBJS)
 
 fclean: clean

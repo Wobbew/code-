@@ -1,7 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        ::::::::            */
+/*   stack1.c                                           :+:    :+:            */
+/*                                                     +:+                    */
+/*   By: wwiedijk <wwiedijk@student.42.fr>            +#+                     */
+/*                                                   +#+                      */
+/*   Created: 2026/01/13 17:30:15 by wwiedijk      #+#    #+#                 */
+/*   Updated: 2026/01/13 19:49:51 by wwiedijk      ########   odam.nl         */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "Pushswap.h"
+
 t_list	*new_node(int number)
 {
 	t_list	*node;
+
 	node = malloc(sizeof(t_list));
 	if (!node)
 		return (0);
@@ -15,6 +29,7 @@ t_list	*new_node(int number)
 	node->cost = -1;
 	return (node);
 }
+
 void	add_back(t_list **stack, t_list *new)
 {
 	t_list	*last;
@@ -32,6 +47,7 @@ void	add_back(t_list **stack, t_list *new)
 	last->next = new;
 	new->prev = last;
 }
+
 static void	free_split(char **split)
 {
 	int	i;
@@ -44,17 +60,19 @@ static void	free_split(char **split)
 	}
 	free(split);
 }
-int arrayintonodes(char ** array, t_list **stack)
+
+int	arrayintonodes(char **array, t_list **stack)
 {
-	int i;
-	int num;
-	t_list *nodetmp;
+	int		i;
+	int		num;
+	t_list	*nodetmp;
+
 	i = 0;
 	while (array[i])
 	{
 		if (check_if_number(array[i]) == 0)
 			return (free_split(array), 1);
-		num =ft_atoi(array[i]);
+		num = ft_atoi(array[i]);
 		nodetmp = new_node(num);
 		if (!nodetmp)
 			return (free_split(array), 1);
@@ -63,13 +81,15 @@ int arrayintonodes(char ** array, t_list **stack)
 	}
 	return (free_split(array), 0);
 }
-int make_stack(t_list **stack, int argc, char const *argv[])
+
+int	make_stack(t_list **stack, int argc, char const *argv[])
 {
-	int i;
+	int	i;
+
 	i = 1;
- 	while (i < argc)
+	while (i < argc)
 	{
-		if(arrayintonodes(ft_split(argv[i], ' '), stack))
+		if (arrayintonodes(ft_split(argv[i], ' '), stack))
 		{
 			write(2, "Error\n", 7);
 			return (1);
@@ -78,17 +98,4 @@ int make_stack(t_list **stack, int argc, char const *argv[])
 	}
 	same_args(stack);
 	return (0);
-}
-int count_nodes(t_list *stack)
-{
-	int count;
-	t_list *tmp;
-	count = 0;
-	tmp = stack;
-	while (tmp)
-	{
-		count++;
-		tmp = tmp->next;
-	}
-	return (count);
 }
