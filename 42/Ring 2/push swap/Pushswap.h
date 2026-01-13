@@ -53,6 +53,7 @@ void RRR(t_list **stack_a, t_list **stack_b);
 void PB(t_list **stack_a, t_list **stack_b);
 void PA(t_list **stack, t_list **stack_a);
 void same_args(t_list **stack);
+int check_if_number(char *str);
 bool can_rotate_both(int one, int two, t_list *node);
 int price_moveboth_at_sametime (t_list *node, t_list **targetstack, t_list **stack);
 void move2totop(t_list **targetstack,t_list **stack, t_list *node);

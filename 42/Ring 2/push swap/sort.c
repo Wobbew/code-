@@ -3,16 +3,13 @@ int sort(t_list **stack_a, t_list **stack_b)
 {
 	int size;
 	size = 0;
-	// t_list *tmp;
-	// print_stack(*stack_a);
 	if (is_sorted(*stack_a))
-		exit(0); // need to free
-	is_sorted(*stack_b);
+		exit ((free_all(stack_a, stack_b), 0));
 	size = count_nodes(*stack_a);
 	if (size == 2)
 	{
 		SA(stack_a);
-		exit(0);
+		exit ((free_all(stack_a, stack_b), 0));
 	}
 	if (size == 3)
 	{
@@ -21,8 +18,6 @@ int sort(t_list **stack_a, t_list **stack_b)
 	}
 	if (size > 3)
 		the_turk(stack_a, stack_b);
-	// print_stack(*stack_a);
-	// print_stack(*stack_b);
 	exit ((free_all(stack_a, stack_b), 0));
 }
 void sort3(t_list **stack)
@@ -56,11 +51,8 @@ void the_turk(t_list **stack_a, t_list **stack_b)
 	if(count_nodes(*stack_a) == 3)
 		the_turk_part_two(stack_a, stack_b);
 	PB(stack_a, stack_b);
-	// fillstack(stack_a, 'A', stack_b);
 	if(count_nodes(*stack_a) == 3)
 		the_turk_part_two(stack_a, stack_b);
-	// print_stack(*stack_a);
-	// print_stack(*stack_b);
 	while (count_nodes(*stack_a) > 3)
 	{
 		clear_priceinfo(stack_a, stack_b);
@@ -69,59 +61,11 @@ void the_turk(t_list **stack_a, t_list **stack_b)
 		find_cheapest(stack_a);
 		move_cheapest(stack_a, stack_b);
 		PB(stack_a, stack_b);
-		// print_stack(*stack_a);
-		// print_stack(*stack_b);
-		// printf("\n");
 	}
 	the_turk_part_two(stack_a, stack_b);
 }
 
-void	fillstack(t_list **stack, char watstack, t_list **targetstack)
-{
-	t_list *node;
-	node = *stack;
-	if (watstack == 'A' && targetstack)
-		fillstack(targetstack, 'B', NULL);
-	else if (watstack == 'B' && targetstack)
-		fillstack(targetstack, 'A', NULL);
-	while (node)
-	{
-		// print_stack(*stack);
-		fillnode(node, stack,  watstack, targetstack);
-		node =node->next;
-	}
-	
-}
-void fillnode(t_list *node, t_list **stack, char watstack, t_list **targetstack)
-{
-	if (node->prev)
-		node->index = node->prev->index + 1;
-	else
-		node->index = 0;
-	node->stack = watstack;
-	if (targetstack)
-		findcost(node,targetstack, stack);
-	else
-	{
-		node->target = NULL;
-		node->cheapest =false;
-		node->cost = -1;
-	}
-	
-}
-void fill_index(t_list **stack)
-{
-	int i;
-	t_list *node;
-	node = *stack;
-	i = 0;
-	while (node)
-	{
-		node->index = i;
-		node = node->next;
-		i++;
-	}
-}
+
 void findcost(t_list *node, t_list **targetstack, t_list **stack)
 {
     findtargetnode(node, targetstack);
@@ -140,12 +84,10 @@ void findcost(t_list *node, t_list **targetstack, t_list **stack)
         node->cost = price_moveboth_at_sametime(node, targetstack, stack);
     else
     {
-        // Calculate separate costs and add them
         int cost1 = price_move1node(node, stack);
         int cost2 = price_move1node(node->target, targetstack);
         node->cost = cost1 + cost2;
     }
-		// node->target->rotate = above_median_line(node->target, targetstack);
 }
 
 int price_move1node(t_list *node, t_list **stack)
@@ -159,7 +101,6 @@ int price_move1node(t_list *node, t_list **stack)
 	if (tmp < 0)
 		price = count_nodes(*stack) - node->index;
 	node->rotate = tmp;
-	// print_info(node);
 	if(tmp == 0)
 	{
     if (count_nodes(*stack) - node->index < node->index)
@@ -230,8 +171,6 @@ void move_cheapest(t_list **stack, t_list **targetstack)
 	while (tmp && !tmp->cheapest)
 		tmp =tmp->next;
 	cheapest = tmp;
-	// print_info(cheapest);
-	// print_stack(*targetstack);
 	if (cheapest->index == 0 && cheapest->target->index == 0)
 		return;
 	if (cheapest->index == 0)
@@ -271,8 +210,6 @@ void move1totop(t_list **stack, t_list *node)
 	fill_index(stack);
 	while (node && (node->index != 0))
 	{
-		// printf("\nrotate%d\tnum%d\n", node->rotate, node->number);
-		
 		if(node->stack == 'A' && (node->index != 0))
 		{
 			if(node->rotate == 1)
@@ -305,8 +242,6 @@ int above_median_line(t_list *node, t_list **stack)
 	float median_line;
 	fill_index(stack);
 	median_line = count_nodes(*stack) / 2.0 ;
-	// print_info(node);
-	// print_stack(*stack);
 	if (median_line > node->index)
 		return(1);
 	if (median_line < node->index)
@@ -319,7 +254,6 @@ bool can_rotate_both(int one, int two, t_list *node)
 {
 	if (one == two || one == 0 || two == 0)
 	{
-		// printf("one:%d\ttwo:%d\n", one, two);
 		if(one != 0)
 			node->rotate = one;
 		else if (two != 0)
@@ -342,7 +276,6 @@ void findtargetnode(t_list *node, t_list **targetstack)
 	}
 	if (node->stack == 'B')
 		targetnodefor_b(node, targetstack);
-	// printf("node num:%d\t targetnode num:%d\n", node->number, node->target->number);
 }
 void targetnodefor_a(t_list *node,t_list **targetstack)
 {
@@ -365,7 +298,7 @@ void targetnodefor_a(t_list *node,t_list **targetstack)
 			targetnode = targetnode->next;
 		}
 	}
-	// print_info(node);
+	
 }
 void targetnodefor_b(t_list *node,t_list **targetstack)
 {
@@ -388,7 +321,6 @@ void targetnodefor_b(t_list *node,t_list **targetstack)
 			targetnode = targetnode->next;
 		}
 	}
-	// print_info(node);
 }
 
 void clear_priceinfo(t_list **stack, t_list **targetstack)
@@ -438,8 +370,6 @@ void	fix_stack_rotates(t_list **stack)
 }
 void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 {
-	print_stack(*stack_a);
-	print_stack(*stack_b);
 	sort3(stack_a);
 	while (count_nodes(*stack_b) > 0)
 	{
@@ -448,23 +378,9 @@ void the_turk_part_two(t_list **stack_a, t_list **stack_b)
 		fillstack(stack_b, 'B', stack_a);
 		find_cheapest(stack_b);
  		move_cheapest(stack_b, stack_a);
-		// print_stack(*stack_a);
 		PA(stack_b, stack_a);
-		// printf("\n");
-		// print_stack(*stack_a);
-		// printf("\n B\t");
-		// print_stack(*stack_b);
-		// printf("\n");
-		// printf("\n");
 	}
-	// print_stack(*stack_a);
 	fix_stack_rotates(stack_a);
-	// print_stack(*stack_a);
-	// print_info(*stack_a);
-	// printf("\n");
-	// print_stack(*stack_b);
-	// print_info(*stack_b);10
-	
 	exit ((free_all(stack_a, stack_b), 0));
 }
 

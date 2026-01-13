@@ -21,12 +21,11 @@ void same_args(t_list **stack)
 	while (node)
 	{
 		tmp = node->next;
-		
 		while (tmp)
 		{
 			if (node->number == tmp->number)
 			{
-				printf("free all");
+				write(2, "Error\n", 7);
 				exit ((free_all(stack, NULL), 1));
 			}
 			tmp = tmp->next;
@@ -34,4 +33,20 @@ void same_args(t_list **stack)
 		node = node->next;
 	}
 	
+}
+
+int check_if_number(char *str)
+{
+	int i;
+
+	i = 0;
+	if (str[i] == '-' || str[i] == '+')
+		i++;
+	while (str[i])
+	{
+		if (ft_isdigit(str[i]) == 0)
+			return (0);
+		i++;
+	}
+	return (1);
 }

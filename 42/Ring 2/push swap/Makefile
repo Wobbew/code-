@@ -10,7 +10,7 @@ SRCS = main.c \
        errors.c \
        stack1.c \
        sortutills.c \
-       sort3num.c \
+       node_info.c \
        sort.c \
        operations1.c \
        utils.c
